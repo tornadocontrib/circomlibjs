@@ -1,5 +1,5 @@
-import chai from "chai";
-const assert = chai.assert;
+import { describe, it, before } from 'node:test'
+import assert from 'node:assert'
 
 import buildPedersenHash from "../src/pedersen_hash.js";
 

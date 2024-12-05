@@ -1,15 +1,14 @@
-import chai from "chai";
-const assert = chai.assert;
+import { describe, it, before } from 'node:test'
+import assert from 'node:assert'
 
 import buildPoseidonOpt from "../src/poseidon_opt.js";
 import {buildPoseidon as buildPoseidonWasm } from "../src/poseidon_wasm.js";
 import buildPoseidonReference from "../src/poseidon_reference.js";
 
-describe("Poseidon test", function () {
+describe("Poseidon test", { timeout: 10000000 }, function () {
     let poseidonOpt;
     let poseidonReference;
     let poseidonWasm;
-    this.timeout(10000000);
 
     before(async () => {
         poseidonOpt = await buildPoseidonOpt();

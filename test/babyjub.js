@@ -1,8 +1,7 @@
-import chai from "chai";
+import { describe, it, before } from 'node:test'
+import assert from 'node:assert'
 import buildBabyjub from "../src/babyjub.js";
 import { Scalar } from "ffjavascript";
-
-const assert = chai.assert;
 
 // const bigInt = require("big-integer");
 
@@ -13,9 +12,8 @@ function buff2hex(buff) {
     return Array.from(buff).map(i2hex).join('');
 }
 
-describe("Baby Jub js test", function () {
+describe("Baby Jub js test", { timeout: 100000 }, function () {
     let babyjub;
-    this.timeout(100000);
 
     before(async () => {
         babyjub = await buildBabyjub();

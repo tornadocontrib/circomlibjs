@@ -1,11 +1,10 @@
-import chai from "chai";
-const assert = chai.assert;
+import { describe, it, before } from 'node:test'
+import assert from 'node:assert'
 
 import buildMimc7 from "../src/mimc7.js";
 
-describe("Mimc7 test", function () {
+describe("Mimc7 test", { timeout: 100000 }, function () {
     let mimc7;
-    this.timeout(1000000);
 
     before(async () => {
         mimc7 = await buildMimc7();

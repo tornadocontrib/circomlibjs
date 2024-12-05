@@ -1,7 +1,6 @@
-import chai from "chai";
+import { describe, it, before } from 'node:test'
+import assert from 'node:assert'
 import { Scalar } from "ffjavascript";
-
-const assert = chai.assert;
 
 import buildEddsa from "../src/eddsa.js";
 
@@ -12,10 +11,9 @@ const toHexString = bytes =>
   bytes.reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
 
 
-describe("EdDSA js test", function () {
+describe("EdDSA js test", { timeout: 100000 }, function () {
 
     let eddsa;
-    this.timeout(100000);
 
     before(async () => {
         eddsa = await buildEddsa();

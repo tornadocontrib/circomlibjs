@@ -2,13 +2,13 @@
 // License: LGPL-3.0+
 //
 
-import { ethers } from "ethers";
-
+import { keccak_256 } from '@noble/hashes/sha3'
 import Contract from "./evmasm.js";
+import { toUtf8Bytes } from './utils.js';
 
 export function createCode(seed, n) {
 
-    let ci = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(seed));
+    let ci = keccak_256(toUtf8Bytes(seed));
 
     const C = new Contract();
 
@@ -51,7 +51,7 @@ export function createCode(seed, n) {
 
     for (let i=0; i<n-1; i++) {
         if (i < n-2) {
-          ci = ethers.utils.keccak256(ci);
+          ci = keccak_256(ci);
         } else {
           ci = "0x00";
         }
@@ -60,7 +60,7 @@ export function createCode(seed, n) {
         C.dup(3);       // k q xR xL k q
         C.dup(1);       // q k q xR xL k q
         C.dup(4);       // xL q k q xR xL k q
-        C.push(ci);     // ci xL q k q xR xL k q
+        C.push(toHexString(ci));     // ci xL q k q xR xL k q
         C.addmod();     // a=ci+xL k q xR xL k q
         C.addmod();     // t=a+k xR xL k q
         C.dup(4);       // q t xR xL k q

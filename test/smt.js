@@ -1,13 +1,11 @@
-import chai from "chai";
+import { describe, it, before } from 'node:test'
+import assert from 'node:assert'
 
 import buildBabyjub from "../src/babyjub.js";
 import  {newMemEmptyTrie} from "../src/smt.js";
 
-const assert = chai.assert;
-
-describe("SMT Javascript test", function () {
+describe("SMT Javascript test", { timeout: 100000 }, function () {
     let Fr;
-    this.timeout(100000);
     before(async () => {
         const babyjub = await buildBabyjub();
         Fr = babyjub.F;
